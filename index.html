@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Videographer Portfolio | Glass Edition</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #000000;
+            --glass: rgba(255, 255, 255, 0.04);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text: #f5f5f7;
+            --accent: #2997ff;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', -apple-system, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        /* Фоновые градиенты для эффекта глубины стекла */
+        .bg-blobs {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            background: 
+                radial-gradient(circle at 15% 20%, #1a1a1a 0%, transparent 40%),
+                radial-gradient(circle at 85% 80%, #121212 0%, transparent 40%);
+        }
+
+        header {
+            height: 50vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        h1 { font-size: clamp(2.5rem, 7vw, 4.5rem); letter-spacing: -2px; margin-bottom: 15px; }
+        .tagline { color: #86868b; font-size: 1.2rem; font-weight: 300; }
+
+        /* РУБРИКАТОР (Glassmorphism Navigation) */
+        .nav-wrapper {
+            position: sticky;
+            top: 20px;
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            padding: 0 10px;
+            margin-bottom: 60px;
+        }
+
+        .filter-nav {
+            background: rgba(20, 20, 20, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 8px;
+            border-radius: 40px;
+            border: 1px solid var(--glass-border);
+            display: flex;
+            gap: 5px;
+            overflow-x: auto;
+            scrollbar-width: none; /* Firefox */
+        }
+        .filter-nav::-webkit-scrollbar { display: none; } /* Chrome/Safari */
+
+        .filter-btn {
+            background: transparent;
+            border: none;
+            color: #86868b;
+            padding: 10px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            white-space: nowrap;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .filter-btn.active {
+            background: var(--text);
+            color: var(--bg);
+        }
+
+        /* КОНТЕНТ */
+        .container { max-width: 1250px; margin: 0 auto; padding: 0 20px 100px; }
+        
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 30px;
+        }
+
+        .portfolio-item {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 28px;
+            overflow: hidden;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), border 0.3s;
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-8px);
+            border-color: rgba(255,255,255,0.25);
+            background: rgba(255,255,255,0.06);
+        }
+
+        .video-box {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            background: #000;
+        }
+
+        .video-box iframe {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            border: none;
+        }
+
+        .info-box { padding: 25px; }
+        .info-box span { 
+            font-size: 0.7rem; 
+            text-transform: uppercase; 
+            letter-spacing: 1.5px; 
+            color: var(--accent);
+            font-weight: 600;
+        }
+        .info-box h3 { font-size: 1.2rem; margin-top: 8px; font-weight: 400; }
+
+        .hidden { display: none; }
+
+        @media (max-width: 600px) {
+            .portfolio-grid { grid-template-columns: 1fr; }
+            h1 { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-blobs"></div>
+
+    <header>
+        <h1>Creative Vision</h1>
+        <p class="tagline">Производство видеоконтента мирового уровня</p>
+    </header>
+
+    <div class="nav-wrapper">
+        <div class="filter-nav">
+            <button class="filter-btn active" onclick="filter('all')">Все</button>
+            <button class="filter-btn" onclick="filter('long')">Длинные истории</button>
+            <button class="filter-btn" onclick="filter('short')">Короткие истории</button>
+            <button class="filter-btn" onclick="filter('live')">Прямые эфиры</button>
+            <button class="filter-btn" onclick="filter('photo')">Фото</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="portfolio-grid" id="portfolio">
+            
+            <!-- Пример: Прямые эфиры -->
+            <div class="portfolio-item live">
+                <div class="video-box">
+                    <iframe src="https://www.youtube.com/embed/LIVE_STREAM_ID" allowfullscreen></iframe>
+                </div>
+                <div class="info-box">
+                    <span>Прямой эфир</span>
+                    <h3>Трансляция теннисного турнира</h3>
+                </div>
+            </div>
+
+            <!-- Пример: Длинные истории -->
+            <div class="portfolio-item long">
+                <div class="video-box">
+                    <iframe src="https://www.youtube.com/embed/LONG_VIDEO_ID" allowfullscreen></iframe>
+                </div>
+                <div class="info-box">
+                    <span>Длинные истории</span>
+                    <h3>Документальный проект: Архитектура</h3>
+                </div>
+            </div>
+
+            <!-- Пример: Короткие истории -->
+            <div class="portfolio-item short">
+                <div class="video-box">
+                    <iframe src="https://www.youtube.com/embed/SHORT_VIDEO_ID" allowfullscreen></iframe>
+                </div>
+                <div class="info-box">
+                    <span>Короткие истории</span>
+                    <h3>Fashion Reel 2026</h3>
+                </div>
+            </div>
+
+            <!-- Пример: Фото -->
+            <div class="portfolio-item photo">
+                <div class="video-box">
+                    <iframe src="https://www.youtube.com/embed/PHOTO_VIDEO_ID" allowfullscreen></iframe>
+                </div>
+                <div class="info-box">
+                    <span>Фото</span>
+                    <h3>Стрит-фотосессия в Тюмени</h3>
+                </div>
+            </div>
+
+            <!-- Добавьте еще 6 блоков выше для общего количества 10 -->
+
+        </div>
+    </div>
+
+    <script>
+        function filter(cat) {
+            // Кнопки
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if(btn.getAttribute('onclick').includes(`'${cat}'`)) btn.classList.add('active');
+            });
+
+            // Карточки
+            document.querySelectorAll('.portfolio-item').forEach(item => {
+                if(cat === 'all' || item.classList.contains(cat)) {
+                    item.classList.remove('hidden');
+                } else {
+                    item.classList.add('hidden');
+                }
+            });
+        }
+    </script>
+</body>
+</html>
