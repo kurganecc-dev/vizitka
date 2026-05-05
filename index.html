@@ -3,15 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Андрей Чебыкин | контент-создатель</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>Андрей Чебыкин | Портфолио</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg: #000000;
             --glass: rgba(255, 255, 255, 0.04);
             --glass-border: rgba(255, 255, 255, 0.1);
             --text: #f5f5f7;
-            --accent: #2997ff;
+            --accent: #0071e3;
+            --secondary-text: #86868b;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -24,61 +25,73 @@
             overflow-x: hidden;
         }
 
-        /* Фоновые градиенты для эффекта глубины стекла */
-        .bg-blobs {
+        /* Анимированный фон */
+        .bg-gradient {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             z-index: -1;
             background: 
-                radial-gradient(circle at 15% 20%, #1a1a1a 0%, transparent 40%),
-                radial-gradient(circle at 85% 80%, #121212 0%, transparent 40%);
+                radial-gradient(circle at 10% 10%, #1a1a1a 0%, transparent 35%),
+                radial-gradient(circle at 90% 90%, #111 0%, transparent 35%);
         }
 
+        /* HEADER */
         header {
-            height: 50vh;
+            height: 60vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
+            padding: 0 20px;
         }
 
-        h1 { font-size: clamp(2.5rem, 7vw, 4.5rem); letter-spacing: -2px; margin-bottom: 15px; }
-        .tagline { color: #86868b; font-size: 1.2rem; font-weight: 300; }
+        header h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 600;
+            letter-spacing: -0.03em;
+            margin-bottom: 15px;
+            background: linear-gradient(180deg, #fff 0%, #86868b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-        /* РУБРИКАТОР (Glassmorphism Navigation) */
-        .nav-wrapper {
+        header p {
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            color: var(--secondary-text);
+            font-weight: 300;
+        }
+
+        /* NAVIGATION / FILTER */
+        .sticky-nav {
             position: sticky;
-            top: 20px;
+            top: 30px;
             z-index: 1000;
             display: flex;
             justify-content: center;
-            padding: 0 10px;
-            margin-bottom: 60px;
+            margin-bottom: 80px;
+            padding: 0 20px;
         }
 
-        .filter-nav {
-            background: rgba(20, 20, 20, 0.6);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            padding: 8px;
-            border-radius: 40px;
+        .filter-bar {
+            background: rgba(20, 20, 20, 0.7);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            padding: 6px;
+            border-radius: 50px;
             border: 1px solid var(--glass-border);
             display: flex;
-            gap: 5px;
-            overflow-x: auto;
-            scrollbar-width: none; /* Firefox */
+            gap: 4px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
         }
-        .filter-nav::-webkit-scrollbar { display: none; } /* Chrome/Safari */
 
         .filter-btn {
             background: transparent;
             border: none;
-            color: #86868b;
-            padding: 10px 20px;
-            border-radius: 30px;
+            color: var(--secondary-text);
+            padding: 12px 24px;
+            border-radius: 40px;
             cursor: pointer;
-            white-space: nowrap;
             font-size: 0.9rem;
             font-weight: 500;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -89,73 +102,135 @@
             color: var(--bg);
         }
 
-        /* КОНТЕНТ */
-        .container { max-width: 1250px; margin: 0 auto; padding: 0 20px 100px; }
+        /* GRID */
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 30px; }
         
         .portfolio-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 40px;
+            margin-bottom: 120px;
         }
 
-        .portfolio-item {
+        .card {
             background: var(--glass);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
             border: 1px solid var(--glass-border);
-            border-radius: 28px;
+            border-radius: 32px;
             overflow: hidden;
-            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), border 0.3s;
+            transition: all 0.6s cubic-bezier(0.15, 0.83, 0.66, 1);
         }
 
-        .portfolio-item:hover {
-            transform: translateY(-8px);
-            border-color: rgba(255,255,255,0.25);
-            background: rgba(255,255,255,0.06);
+        .card:hover {
+            transform: translateY(-10px);
+            background: rgba(255,255,255,0.07);
+            border-color: rgba(255,255,255,0.2);
         }
 
-        .video-box {
+        .video-container {
             position: relative;
             padding-bottom: 56.25%;
             height: 0;
             background: #000;
         }
 
-        .video-box iframe {
+        .video-container iframe {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
             border: none;
         }
 
-        .info-box { padding: 25px; }
-        .info-box span { 
-            font-size: 0.7rem; 
-            text-transform: uppercase; 
-            letter-spacing: 1.5px; 
+        .card-content { padding: 30px; }
+        .card-content span {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
             color: var(--accent);
-            font-weight: 600;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 10px;
         }
-        .info-box h3 { font-size: 1.2rem; margin-top: 8px; font-weight: 400; }
+        .card-content h3 { font-size: 1.4rem; font-weight: 500; }
+
+        /* PARTNERS SECTION */
+        .partners-section {
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .partners-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--secondary-text);
+            margin-bottom: 40px;
+        }
+
+        .partners-card {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 40px;
+            padding: 60px 20px;
+        }
+
+        .partners-flex {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 60px;
+        }
+
+        .partner-logo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            opacity: 0.4;
+            filter: grayscale(100%);
+            transition: all 0.5s ease;
+        }
+
+        .partner-logo:hover {
+            opacity: 1;
+            filter: grayscale(0%);
+            transform: scale(1.1);
+        }
+
+        .partner-logo span {
+            margin-top: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
 
         .hidden { display: none; }
 
-        @media (max-width: 600px) {
+        footer {
+            padding: 80px 20px;
+            text-align: center;
+            color: #424245;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
             .portfolio-grid { grid-template-columns: 1fr; }
-            h1 { font-size: 2.5rem; }
+            .filter-bar { overflow-x: auto; max-width: 100%; border-radius: 25px; }
+            .filter-btn { padding: 10px 16px; font-size: 0.8rem; }
         }
     </style>
 </head>
 <body>
 
-    <div class="bg-blobs"></div>
+    <div class="bg-gradient"></div>
 
     <header>
         <h1>Андрей Чебыкин</h1>
-        <p class="tagline">Производство контента высокого уровня</p>
+        <p>Видеоролики • Прямые эфиры • Фотография</p>
     </header>
 
-    <div class="nav-wrapper">
-        <div class="filter-nav">
+    <div class="sticky-nav">
+        <div class="filter-bar">
             <button class="filter-btn active" onclick="filter('all')">Все</button>
             <button class="filter-btn" onclick="filter('long')">Длинные истории</button>
             <button class="filter-btn" onclick="filter('short')">Короткие истории</button>
@@ -164,72 +239,92 @@
         </div>
     </div>
 
-    <div class="container">
+    <main class="container">
         <div class="portfolio-grid" id="portfolio">
             
-            <!-- Пример: Прямые эфиры -->
-            <div class="portfolio-item live">
-                <div class="video-box">
-                    <iframe src="https://www.youtube.com/embed/LIVE_STREAM_ID" allowfullscreen></iframe>
+            <!-- 1. LIVE -->
+            <div class="card live">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/ЗАМЕНИ_ID_1" allowfullscreen></iframe>
                 </div>
-                <div class="info-box">
+                <div class="card-content">
                     <span>Прямой эфир</span>
-                    <h3>Трансляция теннисного турнира</h3>
+                    <h3>Многокамерная трансляция турнира</h3>
                 </div>
             </div>
 
-            <!-- Пример: Длинные истории -->
-            <div class="portfolio-item long">
-                <div class="video-box">
-                    <iframe src="https://www.youtube.com/embed/LONG_VIDEO_ID" allowfullscreen></iframe>
+            <!-- 2. LONG -->
+            <div class="card long">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/ЗАМЕНИ_ID_2" allowfullscreen></iframe>
                 </div>
-                <div class="info-box">
+                <div class="card-content">
                     <span>Длинные истории</span>
-                    <h3>Документальный проект: Архитектура</h3>
+                    <h3>Архитектурный облик города</h3>
                 </div>
             </div>
 
-            <!-- Пример: Короткие истории -->
-            <div class="portfolio-item short">
-                <div class="video-box">
-                    <iframe src="https://www.youtube.com/embed/wqmrxL8skA4?si=AM9B1IGCLhEcwbd8" allowfullscreen></iframe>
+            <!-- 3. SHORT -->
+            <div class="card short">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/ЗАМЕНИ_ID_3" allowfullscreen></iframe>
                 </div>
-                <div class="info-box">
+                <div class="card-content">
                     <span>Короткие истории</span>
-                    <h3>ТЭО 2023</h3>
+                    <h3>Promo: Новая эстетика</h3>
                 </div>
             </div>
 
-            <!-- Пример: Фото -->
-            <div class="portfolio-item photo">
-                <div class="video-box">
-                    <iframe src="https://www.youtube.com/embed/PHOTO_VIDEO_ID" allowfullscreen></iframe>
-                </div>
-                <div class="info-box">
-                    <span>Фото</span>
-                    <h3>Стрит-фотосессия в Тюмени</h3>
-                </div>
-            </div>
-
-            <!-- Добавьте еще 6 блоков выше для общего количества 10 -->
+            <!-- Повторите блоки card выше, пока не наберется 10 штук -->
 
         </div>
-    </div>
+
+        <!-- PARTNERS -->
+        <section class="partners-section">
+            <p class="partners-label">С кем я сотрудничал</p>
+            <div class="partners-card">
+                <div class="partners-flex">
+                    <div class="partner-logo">
+                        <div style="font-size: 2rem;">Этажи</div>
+                        <span>REAL ESTATE</span>
+                    </div>
+                    <div class="partner-logo">
+                        <div style="font-size: 2rem;">SPORT</div>
+                        <span>BROADCAST</span>
+                    </div>
+                    <div class="partner-logo">
+                        <div style="font-size: 2rem;">CINE</div>
+                        <span>PRODUCTION</span>
+                    </div>
+                    <div class="partner-logo">
+                        <div style="font-size: 2rem;">FASHION</div>
+                        <span>AGENCY</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        &copy; 2026 Задизайнено автором портфолио
+    </footer>
 
     <script>
-        function filter(cat) {
-            // Кнопки
+        function filter(category) {
+            // Update Buttons
             document.querySelectorAll('.filter-btn').forEach(btn => {
                 btn.classList.remove('active');
-                if(btn.getAttribute('onclick').includes(`'${cat}'`)) btn.classList.add('active');
+                if(btn.getAttribute('onclick').includes(`'${category}'`)) {
+                    btn.classList.add('active');
+                }
             });
 
-            // Карточки
-            document.querySelectorAll('.portfolio-item').forEach(item => {
-                if(cat === 'all' || item.classList.contains(cat)) {
-                    item.classList.remove('hidden');
+            // Update Cards
+            document.querySelectorAll('.card').forEach(card => {
+                if(category === 'all' || card.classList.contains(category)) {
+                    card.classList.remove('hidden');
                 } else {
-                    item.classList.add('hidden');
+                    card.classList.add('hidden');
                 }
             });
         }
