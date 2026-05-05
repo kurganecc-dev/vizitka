@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Андрей Чебыкин | Портфолио</title>
+    <title>Андрей Чебыкин | Digital Vision</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <style>
         :root {
             --bg: #000000;
-            --glass: rgba(255, 255, 255, 0.04);
-            --glass-border: rgba(255, 255, 255, 0.1);
-            --text: #f5f5f7;
+            --glass: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --text: #ffffff;
             --accent: #0071e3;
             --secondary-text: #86868b;
         }
@@ -25,17 +26,15 @@
             overflow-x: hidden;
         }
 
-        /* Анимированный фон */
         .bg-gradient {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             z-index: -1;
             background: 
-                radial-gradient(circle at 10% 10%, #1a1a1a 0%, transparent 35%),
-                radial-gradient(circle at 90% 90%, #111 0%, transparent 35%);
+                radial-gradient(circle at 15% 15%, #1d1d1f 0%, transparent 40%),
+                radial-gradient(circle at 85% 85%, #161617 0%, transparent 40%);
         }
 
-        /* HEADER */
         header {
             height: 60vh;
             display: flex;
@@ -47,13 +46,13 @@
         }
 
         header h1 {
-            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-size: clamp(3rem, 10vw, 6rem);
             font-weight: 600;
-            letter-spacing: -0.03em;
-            margin-bottom: 15px;
-            background: linear-gradient(180deg, #fff 0%, #86868b 100%);
+            letter-spacing: -0.04em;
+            background: linear-gradient(to bottom, #fff 30%, rgba(255,255,255,0.5));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
         }
 
         header p {
@@ -62,68 +61,64 @@
             font-weight: 300;
         }
 
-        /* NAVIGATION / FILTER */
         .sticky-nav {
             position: sticky;
-            top: 30px;
+            top: 20px;
             z-index: 1000;
+            padding: 20px;
             display: flex;
             justify-content: center;
-            margin-bottom: 80px;
-            padding: 0 20px;
         }
 
         .filter-bar {
-            background: rgba(20, 20, 20, 0.7);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            padding: 6px;
+            background: rgba(22, 22, 23, 0.8);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            padding: 5px;
             border-radius: 50px;
             border: 1px solid var(--glass-border);
             display: flex;
-            gap: 4px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.5);
         }
 
         .filter-btn {
             background: transparent;
             border: none;
             color: var(--secondary-text);
-            padding: 12px 24px;
+            padding: 10px 20px;
             border-radius: 40px;
             cursor: pointer;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 500;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.3s ease;
         }
 
         .filter-btn.active {
-            background: var(--text);
-            color: var(--bg);
+            background: rgba(255,255,255,0.1);
+            color: #fff;
         }
 
-        /* GRID */
-        .container { max-width: 1400px; margin: 0 auto; padding: 0 30px; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 40px; }
         
         .portfolio-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-            gap: 40px;
-            margin-bottom: 120px;
+            gap: 30px;
+            margin-bottom: 100px;
         }
 
         .card {
             background: var(--glass);
             border: 1px solid var(--glass-border);
-            border-radius: 32px;
+            border-radius: 24px;
             overflow: hidden;
-            transition: all 0.6s cubic-bezier(0.15, 0.83, 0.66, 1);
+            transition: all 0.5s ease;
         }
 
         .card:hover {
-            transform: translateY(-10px);
-            background: rgba(255,255,255,0.07);
+            transform: translateY(-5px);
             border-color: rgba(255,255,255,0.2);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
         }
 
         .video-container {
@@ -139,84 +134,54 @@
             border: none;
         }
 
-        .card-content { padding: 30px; }
+        .card-content { padding: 25px; }
         .card-content span {
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 1.5px;
             color: var(--accent);
             font-weight: 700;
-            display: block;
-            margin-bottom: 10px;
         }
-        .card-content h3 { font-size: 1.4rem; font-weight: 500; }
+        .card-content h3 { font-size: 1.2rem; margin-top: 8px; font-weight: 400; }
 
-        /* PARTNERS SECTION */
-        .partners-section {
-            padding: 100px 0;
-            text-align: center;
-        }
-
-        .partners-label {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            color: var(--secondary-text);
-            margin-bottom: 40px;
-        }
-
-        .partners-card {
-            background: var(--glass);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            border-radius: 40px;
-            padding: 60px 20px;
-        }
-
-        .partners-flex {
-            display: flex;
-            justify-content: center;
+        .partners-section { padding: 100px 20px; text-align: center; }
+        .partners-label { color: var(--secondary-text); font-size: 0.8rem; letter-spacing: 2px; margin-bottom: 50px; }
+        
+        .partners-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 50px;
             align-items: center;
-            flex-wrap: wrap;
-            gap: 60px;
+            max-width: 1100px;
+            margin: 0 auto;
         }
 
-        .partner-logo {
+        .partner-box {
             display: flex;
             flex-direction: column;
             align-items: center;
             opacity: 0.4;
-            filter: grayscale(100%);
-            transition: all 0.5s ease;
+            transition: 0.5s;
         }
 
-        .partner-logo:hover {
-            opacity: 1;
-            filter: grayscale(0%);
-            transform: scale(1.1);
+        .partner-box:hover { opacity: 1; transform: translateY(-5px); }
+        
+        .partner-box img {
+            max-width: 120px;
+            height: auto;
+            max-height: 45px;
+            object-fit: contain;
+            margin-bottom: 15px;
         }
 
-        .partner-logo span {
-            margin-top: 15px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            letter-spacing: 1px;
-        }
+        .partner-box span { font-size: 0.7rem; color: var(--secondary-text); text-align: center; }
 
         .hidden { display: none; }
-
-        footer {
-            padding: 80px 20px;
-            text-align: center;
-            color: #424245;
-            font-size: 0.9rem;
-        }
-
+        
         @media (max-width: 768px) {
             .portfolio-grid { grid-template-columns: 1fr; }
-            .filter-bar { overflow-x: auto; max-width: 100%; border-radius: 25px; }
-            .filter-btn { padding: 10px 16px; font-size: 0.8rem; }
+            header h1 { font-size: 2.5rem; }
+            .filter-bar { overflow-x: auto; max-width: 100vw; }
         }
     </style>
 </head>
@@ -224,12 +189,12 @@
 
     <div class="bg-gradient"></div>
 
-    <header>
+    <header class="animate__animated animate__fadeIn">
         <h1>Андрей Чебыкин</h1>
         <p>Видеоролики • Прямые эфиры • Фотография</p>
     </header>
 
-    <div class="sticky-nav">
+    <nav class="sticky-nav">
         <div class="filter-bar">
             <button class="filter-btn active" onclick="filter('all')">Все</button>
             <button class="filter-btn" onclick="filter('long')">Длинные истории</button>
@@ -237,13 +202,13 @@
             <button class="filter-btn" onclick="filter('live')">Прямые эфиры</button>
             <button class="filter-btn" onclick="filter('photo')">Фото</button>
         </div>
-    </div>
+    </nav>
 
     <main class="container">
         <div class="portfolio-grid" id="portfolio">
             
-            <!-- 1. LIVE -->
-            <div class="card live">
+            <!-- 1. LIVE (Заглушка) -->
+            <div class="card live animate__animated animate__fadeInUp">
                 <div class="video-container">
                     <iframe src="https://www.youtube.com/embed/ЗАМЕНИ_ID_1" allowfullscreen></iframe>
                 </div>
@@ -253,8 +218,8 @@
                 </div>
             </div>
 
-            <!-- 2. LONG -->
-            <div class="card long">
+            <!-- 2. LONG (Заглушка) -->
+            <div class="card long animate__animated animate__fadeInUp">
                 <div class="video-container">
                     <iframe src="https://www.youtube.com/embed/ЗАМЕНИ_ID_2" allowfullscreen></iframe>
                 </div>
@@ -264,10 +229,10 @@
                 </div>
             </div>
 
-            <!-- 3. SHORT -->
-            <div class="card short">
+            <!-- 3. SHORT (ТЭО) -->
+            <div class="card short animate__animated animate__fadeInUp">
                 <div class="video-container">
-                    <iframe src="https://www.youtube.com/embed/wqmrxL8skA4?si=AM9B1IGCLhEcwbd8" allowfullscreen></iframe>
+                    <iframe src="https://www.youtube.com/embed/wqmrxL8skA4" allowfullscreen></iframe>
                 </div>
                 <div class="card-content">
                     <span>Короткие истории</span>
@@ -275,10 +240,10 @@
                 </div>
             </div>
 
-            <!-- 3. SHORT -->
-            <div class="card short">
+            <!-- 4. SHORT (Этажи) -->
+            <div class="card short animate__animated animate__fadeInUp">
                 <div class="video-container">
-                    <iframe src="https://www.youtube.com/embed/DQsKLImv1lo?si=ntJqYQTmAX_lGyiD" allowfullscreen></iframe>
+                    <iframe src="https://www.youtube.com/embed/DQsKLImv1lo" allowfullscreen></iframe>
                 </div>
                 <div class="card-content">
                     <span>Короткие истории</span>
@@ -286,62 +251,64 @@
                 </div>
             </div>
 
+            <!-- Добавь остальные карточки по аналогии ниже -->
+
         </div>
 
-        <!-- PARTNERS -->
         <section class="partners-section">
-            <p class="partners-label">С кем я сотрудничал</p>
-            <div class="partners-card">
-                <div class="partners-flex">
-                    <div class="partner-logo">
-        <img src="https://cdn.esoft.digital/content/cluster/media/56/39a3298bdc9fc0f3c72acf626dbb385a65c37f56.svg" alt="Федеральная компания Этажи" style="height: 50px; width: auto;">
-        <span>Федеральная компания</span>
-    </div>
-                    <div class="partner-logo">
-        <img src="https://gkinko.ru/icon-12jlf3.svg?ee3ef5ddc401e586" alt="Группа компаний ИНКО" style="height: 50px; width: auto;">
-        <span>Группа компаний ИНКО</span>
-     </div>  
-                    <div class="partner-logo">
-        <img src="https://harizmi.ru/images/logo.svg" alt="Застройщик Харизмы" style="height: 50px; width: auto;">
-        <span>Застройщик Харизмы</span>
-    </div>
-                   <div class="partner-logo">
-        <img src="https://static.tildacdn.com/tild3538-3839-4733-a433-623738376464/logo_HISSTORY.svg" alt="Магазин мужских костюмов His Story" style="height: 50px; width: auto;">
-        <span>Магазин мужских костюмов His Story</span>
-    </div>
-                      <div class="partner-logo">
-        <img src="https://images.seeklogo.com/logo-png/36/2/maxim-logo-png_seeklogo-365679.png" alt="Агрегатор такси Максим" style="height: 50px; width: auto;">
-        <span>Агрегатор такси Максим</span>
-    </div>
-                    <div class="partner-logo">
-        <img src="https://teo.ecotko.ru/site/templates/assets/img/xlogo_white.png.pagespeed.ic.WLiWO-JKEK.webp" alt="Тюменское экологическое объединение" style="height: 50px; width: auto;">
-        <span>Тюменское экологическое объединение</span>
-    </div>
+            <p class="partners-label">ДОВЕРИЕ БРЕНДОВ</p>
+            <div class="partners-grid">
+                <div class="partner-box">
+                    <img src="https://cdn.esoft.digital/content/cluster/media/56/39a3298bdc9fc0f3c72acf626dbb385a65c37f56.svg" alt="Этажи">
+                    <span>Федеральная компания</span>
+                </div>
+                <div class="partner-box">
+                    <img src="https://gkinko.ru/icon-12jlf3.svg?ee3ef5ddc401e586" alt="ИНКО">
+                    <span>ГК ИНКО</span>
+                </div>
+                <div class="partner-box">
+                    <img src="https://harizmi.ru/images/logo.svg" alt="Харизмы">
+                    <span>Застройщик Харизмы</span>
+                </div>
+                <div class="partner-box">
+                    <img src="https://static.tildacdn.com/tild3538-3839-4733-a433-623738376464/logo_HISSTORY.svg" alt="His Story">
+                    <span>His Story</span>
+                </div>
+                <div class="partner-box">
+                    <img src="https://images.seeklogo.com/logo-png/36/2/maxim-logo-png_seeklogo-365679.png" alt="Максим">
+                    <span>Такси Максим</span>
+                </div>
+                <div class="partner-box">
+                    <img src="https://teo.ecotko.ru/site/templates/assets/img/xlogo_white.png.pagespeed.ic.WLiWO-JKEK.webp" alt="ТЭО">
+                    <span>ТЭО</span>
                 </div>
             </div>
         </section>
     </main>
 
-    <footer>
-        &copy; 2026 Задизайнено автором портфолио
+    <footer style="padding: 80px 20px; text-align: center; color: var(--secondary-text); font-size: 0.8rem;">
+        &copy; 2026 Андрей Чебыкин. Visionary Production.
     </footer>
 
     <script>
         function filter(category) {
-            // Update Buttons
-            document.querySelectorAll('.filter-btn').forEach(btn => {
+            const buttons = document.querySelectorAll('.filter-btn');
+            const cards = document.querySelectorAll('.card');
+
+            buttons.forEach(btn => {
                 btn.classList.remove('active');
-                if(btn.getAttribute('onclick').includes(`'${category}'`)) {
-                    btn.classList.add('active');
-                }
+                if(btn.getAttribute('onclick').includes(`'${category}'`)) btn.classList.add('active');
             });
 
-            // Update Cards
-            document.querySelectorAll('.card').forEach(card => {
-                if(category === 'all' || card.classList.contains(category)) {
-                    card.classList.remove('hidden');
-                } else {
-                    card.classList.add('hidden');
+            cards.forEach(card => {
+                card.style.display = 'none';
+                card.classList.remove('animate__fadeInUp');
+                
+                if (category === 'all' || card.classList.contains(category)) {
+                    card.style.display = 'block';
+                    setTimeout(() => {
+                        card.classList.add('animate__fadeInUp');
+                    }, 10);
                 }
             });
         }
